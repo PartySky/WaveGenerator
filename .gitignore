@@ -1,0 +1,5 @@
+
+Tests/bin/*
+Tests/obj/*
+WaveGenerator/bin/*
+WaveGenerator/obj/*
