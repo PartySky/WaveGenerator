@@ -3,3 +3,6 @@ Tests/bin/*
 Tests/obj/*
 WaveGenerator/bin/*
 WaveGenerator/obj/*
+.vs/*
+ForTests/bin/*
+ForTests/obj/*
