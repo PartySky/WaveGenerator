@@ -6,3 +6,6 @@ WaveGenerator/obj/*
 .vs/*
 ForTests/bin/*
 ForTests/obj/*
+WaveReader/bin/*
+WaveReader/obj/*
+WaveReader/ForTests/*

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveGenerator", "WaveGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{210725C2-7252-40B6-B683-14E53A5F8C32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveReader", "WaveReader\WaveReader.csproj", "{7840C6F1-295E-4C84-8B70-F328B27946F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,22 @@ Global
 		{210725C2-7252-40B6-B683-14E53A5F8C32}.Release|x64.ActiveCfg = Release|Any CPU
 		{210725C2-7252-40B6-B683-14E53A5F8C32}.Release|x64.Build.0 = Release|Any CPU
 		{210725C2-7252-40B6-B683-14E53A5F8C32}.Release|x86.ActiveCfg = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|x64.Build.0 = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x64.ActiveCfg = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x64.Build.0 = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
