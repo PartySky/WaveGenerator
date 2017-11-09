@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveGenerator", "WaveGenerator\WaveGenerator.csproj", "{FEDDFDB0-B803-4508-89C6-3CD00B4B4AD0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{210725C2-7252-40B6-B683-14E53A5F8C32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveReader", "WaveReader\WaveReader.csproj", "{7840C6F1-295E-4C84-8B70-F328B27946F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaveReader", "WaveReader\WaveReader.csproj", "{7840C6F1-295E-4C84-8B70-F328B27946F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveChart", "WaveChart\WaveChart.csproj", "{83108AFC-23E0-42E0-A637-1612C756B6A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,8 +69,27 @@ Global
 		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x64.Build.0 = Release|Any CPU
 		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x86.ActiveCfg = Release|Any CPU
 		{7840C6F1-295E-4C84-8B70-F328B27946F9}.Release|x86.Build.0 = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|x64.Build.0 = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Debug|x86.Build.0 = Debug|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|x64.ActiveCfg = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|x64.Build.0 = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|x86.ActiveCfg = Release|Any CPU
+		{83108AFC-23E0-42E0-A637-1612C756B6A7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85BA9650-552D-4DCB-B224-3904BBA2CF60}
 	EndGlobalSection
 EndGlobal

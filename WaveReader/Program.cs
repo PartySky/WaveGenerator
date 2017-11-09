@@ -42,6 +42,7 @@ namespace myApp
             //myWaveData = File.ReadAllBytes("./ForTests/load.wav");
 
             File.WriteAllBytes("./ForTests/test2.wav", myWaveData);
+			Console.WriteLine();
         }
     }
 }
