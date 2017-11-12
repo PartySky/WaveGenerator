@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.VisualBasic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +20,8 @@ namespace WaveChart
 				.UseApplicationInsights()
 				.Build();
 
-			host.Run();
+			Console.WriteLine("qwe");
+            host.Run();
 		}
 	}
 }
