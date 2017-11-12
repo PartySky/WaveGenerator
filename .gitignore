@@ -275,3 +275,4 @@ __pycache__/
 *.pyc
 WaveChart/wwwroot/scripts/*.js
 WaveChart/wwwroot/scripts/*.map
+*.wav

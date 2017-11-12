@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveGenerator", "WaveGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{210725C2-7252-40B6-B683-14E53A5F8C32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WaveReader", "WaveReader\WaveReader.csproj", "{7840C6F1-295E-4C84-8B70-F328B27946F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveReader", "WaveReader\WaveReader.csproj", "{7840C6F1-295E-4C84-8B70-F328B27946F9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WaveChart", "WaveChart\WaveChart.csproj", "{83108AFC-23E0-42E0-A637-1612C756B6A7}"
 EndProject

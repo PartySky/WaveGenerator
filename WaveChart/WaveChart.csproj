@@ -13,6 +13,9 @@
     <Content Remove="obj\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="obj\**" />
+    <None Remove="Method.2\.DS_Store" />
+    <Compile Remove="Method.2\Save.cs" />
+    <None Remove="Method.1\.DS_Store" />
   </ItemGroup>
   
   <ItemGroup>
@@ -24,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Frontend\" />
     <Folder Include="wwwroot\scripts\" />
+    <Folder Include="Method.1\" />
   </ItemGroup>
 
 </Project>
