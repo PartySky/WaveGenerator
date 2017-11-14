@@ -18,7 +18,9 @@ namespace WaveChart
         // 60 seconds or 1 minute of audio
         private const int AUDIO_LENGTH_IN_SECONDS = 1;
 
-        public static void Main(string[] args)
+		public static byte[] TestWaveData { get; private set; }
+
+		public static void Main(string[] args)
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
@@ -30,6 +32,7 @@ namespace WaveChart
 
             int generationMethod = 2;
 			string filePath = @".\ForTests\test2.wav";
+			string filePathRead = @".\ForTests\test-read2.wav";
 
 			switch (generationMethod)
             {
@@ -70,11 +73,24 @@ namespace WaveChart
 
                 case 2:
 
-                    filePath = @".\ForTests\test21.wav";
-                    //WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
-                    WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
-                    wave.Save(filePath);
+					filePath = @".\ForTests\test2.wav";
+					//WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
+					WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
+					//wave.Save(filePath);
+					if (!File.Exists(@".\ForTests\test-read2.wav"))
+					{
+						Console.WriteLine("File doesn't exist");
+						break;
+					}
+					// Open a file (it always overwrites)
+					//FileStream fileStream = new FileStream(@".\ForTests\test-read3.wav", FileMode.Open);
 
+					// Use BinaryReader to read the bytes to the file
+					//BinaryReader reader = new BinaryReader(fileStream);
+
+					TestWaveData = File.ReadAllBytes(@".\ForTests\test3.wav");
+
+					//wave.Read(filePathRead);
                     break;
                 default:
                     break;
