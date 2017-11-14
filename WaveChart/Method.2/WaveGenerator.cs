@@ -58,6 +58,10 @@ namespace WaveChart
 
         public void Save(string filePath)
         {
+			if (!File.Exists(filePath)) {
+				Console.WriteLine("File doesn't exist");
+				return;
+			}
             // Create a file (it always overwrites)
             FileStream fileStream = new FileStream(filePath, FileMode.Create);
 

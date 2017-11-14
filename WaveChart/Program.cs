@@ -28,8 +28,10 @@ namespace WaveChart
                 .UseApplicationInsights()
                 .Build();
 
-            int generationMethod = 1;
-            switch (generationMethod)
+            int generationMethod = 2;
+			string filePath = @".\ForTests\test2.wav";
+
+			switch (generationMethod)
             {
                 case 1:
                     
@@ -54,16 +56,21 @@ namespace WaveChart
                     tempBytes.AddRange(data.GetBytes());
 
                     myWaveData = tempBytes.ToArray();
+					
+					filePath = @".\ForTests\test2.wav";
 
-                    //myWaveData = File.ReadAllBytes("./ForTests/load.wav");
-
-                    File.WriteAllBytes("./ForTests/test2.wav", myWaveData);
+					if (!File.Exists(filePath))
+					{
+						Console.WriteLine("File doesn't exist");
+						break;
+					}
+					File.WriteAllBytes(filePath, myWaveData);
                     File.WriteAllBytes("./ForTests/data.tsv", myWaveData);
                     break;
 
                 case 2:
 
-                    string filePath = @".\ForTests\test2.wav";
+                    filePath = @".\ForTests\test21.wav";
                     //WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
                     WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
                     wave.Save(filePath);
