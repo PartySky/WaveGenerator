@@ -17,6 +17,8 @@ namespace WaveChart
         private const int SAMPLE_FREQUENCY = 44100;
         // 60 seconds or 1 minute of audio
         private const int AUDIO_LENGTH_IN_SECONDS = 1;
+		private static char sGroupIDChar1;
+		private static char sGroupIDChar2;
 
 		public static byte[] TestWaveData { get; private set; }
 
@@ -76,22 +78,29 @@ namespace WaveChart
 					filePath = @".\ForTests\test2.wav";
 					//WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
 					WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
-					//wave.Save(filePath);
+					wave.Save(filePath);
 					if (!File.Exists(@".\ForTests\test-read2.wav"))
 					{
 						Console.WriteLine("File doesn't exist");
 						break;
 					}
 					// Open a file (it always overwrites)
-					//FileStream fileStream = new FileStream(@".\ForTests\test-read3.wav", FileMode.Open);
+					FileStream fileStream = new FileStream(@".\ForTests\read3.wav", FileMode.Open);
 
 					// Use BinaryReader to read the bytes to the file
-					//BinaryReader reader = new BinaryReader(fileStream);
+					BinaryReader reader = new BinaryReader(fileStream);
 
-					TestWaveData = File.ReadAllBytes(@".\ForTests\test3.wav");
+					//TestWaveData = File.ReadAllBytes(@".\ForTests\test3.wav");
 
 					//wave.Read(filePathRead);
-                    break;
+
+					sGroupIDChar1 = reader.ReadChar();
+					sGroupIDChar2 = reader.ReadChar();
+					//shortArrayReaded
+
+					reader.Dispose();
+					fileStream.Dispose();
+					break;
                 default:
                     break;
             }
