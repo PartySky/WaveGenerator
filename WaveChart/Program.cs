@@ -23,7 +23,7 @@ namespace WaveChart
 		public static byte[] TestWaveData { get; private set; }
 
 		public static void Main(string[] args)
-        {
+        {	
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -35,6 +35,9 @@ namespace WaveChart
             int generationMethod = 2;
 			string filePath = @".\ForTests\test2.wav";
 			string filePathRead = @".\ForTests\test-read2.wav";
+			//int[] test;
+			//test = new int[4];
+			char[] sGroupIDReaded = new char[4];
 
 			switch (generationMethod)
             {
@@ -94,8 +97,19 @@ namespace WaveChart
 
 					//wave.Read(filePathRead);
 
-					sGroupIDChar1 = reader.ReadChar();
-					sGroupIDChar2 = reader.ReadChar();
+					//sGroupIDChar1 = reader.ReadChar();
+					//sGroupIDChar2 = reader.ReadChar();
+					
+					for (int i=0; i<4; i++) {
+						Console.WriteLine(sGroupIDReaded[i]);
+						sGroupIDReaded[i] = reader.ReadChar();
+					}
+
+					for (int i=0; i<4; i++)
+					{
+						Console.WriteLine(sGroupIDReaded[i]);
+					}
+
 					//shortArrayReaded
 
 					reader.Dispose();
