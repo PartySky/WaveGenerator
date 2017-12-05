@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
-
 namespace WaveChart
 {
     public class Program
@@ -17,10 +16,11 @@ namespace WaveChart
         private const int SAMPLE_FREQUENCY = 44100;
         // 60 seconds or 1 minute of audio
         private const int AUDIO_LENGTH_IN_SECONDS = 1;
-		private static char sGroupIDChar1;
-		private static char sGroupIDChar2;
-
 		public static byte[] TestWaveData { get; private set; }
+        private const int generationMethod = 2;
+        private const string fileToWrite = "test2.wav";
+        private const string fileToRead = "test-read2.wav";
+        private const string subFolder = "ForTests";
 
 		public static void Main(string[] args)
         {	
@@ -31,13 +31,12 @@ namespace WaveChart
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .Build();
-
-            int generationMethod = 2;
-			string filePath = @".\ForTests\test2.wav";
-			string filePathRead = @".\ForTests\test-read2.wav";
-			//int[] test;
-			//test = new int[4];
-			char[] sGroupIDReaded = new char[4];
+            string filePathWrite = Path.Combine(
+                Directory.GetCurrentDirectory(), subFolder, fileToWrite
+            );
+            string filePathRead = Path.Combine(
+                Directory.GetCurrentDirectory(), subFolder, fileToRead
+            );
 
 			switch (generationMethod)
             {
@@ -50,10 +49,13 @@ namespace WaveChart
                     DataChunk data = new DataChunk();
 
                     // Create 1 second of tone at 697Hz
-					SineGenerator leftData = new SineGenerator(697.0f, SAMPLE_FREQUENCY, AUDIO_LENGTH_IN_SECONDS);
+					SineGenerator leftData = new SineGenerator(
+                        697.0f, SAMPLE_FREQUENCY, AUDIO_LENGTH_IN_SECONDS
+                    );
                     // Create 1 second of tone at 1209Hz
-                    SineGenerator rightData = new SineGenerator(1209.0f,
-                       SAMPLE_FREQUENCY, AUDIO_LENGTH_IN_SECONDS);
+                    SineGenerator rightData = new SineGenerator(
+                        1209.0f,SAMPLE_FREQUENCY, AUDIO_LENGTH_IN_SECONDS
+                    );
 
                     data.AddSampleData(leftData.Data, rightData.Data);
 
@@ -65,63 +67,24 @@ namespace WaveChart
 
                     myWaveData = tempBytes.ToArray();
 					
-					filePath = @".\ForTests\test2.wav";
+					filePathWrite = @".\ForTests\test2.wav";
 
-					if (!File.Exists(filePath))
+					if (!File.Exists(filePathWrite))
 					{
 						Console.WriteLine("File doesn't exist");
 						break;
 					}
-					File.WriteAllBytes(filePath, myWaveData);
+					File.WriteAllBytes(filePathWrite, myWaveData);
                     File.WriteAllBytes("./ForTests/data.tsv", myWaveData);
                     break;
 
                 case 2:
-
-					filePath = @".\ForTests\test2.wav";
-					//WaveGenerator wave = new WaveGenerator(WaveExampleType.ExampleSineWave);
 					WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
-					wave.Save(filePath);
-					if (!File.Exists(@".\ForTests\test-read2.wav"))
-					{
-						Console.WriteLine("File doesn't exist");
-						break;
-					}
-					// Open a file (it always overwrites)
-					FileStream fileStream = new FileStream(@".\ForTests\read3.wav", FileMode.Open);
-
-					// Use BinaryReader to read the bytes to the file
-					BinaryReader reader = new BinaryReader(fileStream);
-
-					//TestWaveData = File.ReadAllBytes(@".\ForTests\test3.wav");
-
-					//wave.Read(filePathRead);
-
-					//sGroupIDChar1 = reader.ReadChar();
-					//sGroupIDChar2 = reader.ReadChar();
-					
-					for (int i=0; i<4; i++) {
-						Console.WriteLine(sGroupIDReaded[i]);
-						sGroupIDReaded[i] = reader.ReadChar();
-					}
-
-					for (int i=0; i<4; i++)
-					{
-						Console.WriteLine(sGroupIDReaded[i]);
-					}
-
-					//shortArrayReaded
-
-					reader.Dispose();
-					fileStream.Dispose();
+                    wave.Save(filePathWrite);
+					ChartGenerator chartGenerator = new ChartGenerator();
+                    chartGenerator.Read(filePathRead);
 					break;
-                default:
-                    break;
             }
-
-
-            Console.WriteLine();
-
             host.Run();
         }
     }
