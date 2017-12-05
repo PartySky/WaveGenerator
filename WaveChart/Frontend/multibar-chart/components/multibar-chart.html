@@ -1,0 +1,15 @@
+<h1>Chart</h1>
+
+<div ng-click="$ctrl.check()">check()</div>
+<audio id="audio_uk"
+       preload="auto">
+        <source src="http://wooordhunt.ru/data/sound/word/uk/mp3/fidget.mp3"
+                type="audio/mpeg">
+        <source src="/data/sound/word/uk/ogg/fidget.ogg"
+                type="audio/ogg; codecs=vorbis"> Тег audio не поддерживается вашим браузером. </audio>
+<div onclick="document.getElementById('audio_uk').play();">play()</div>
+
+<nvd3 options="$ctrl.trackOptions"
+      data="$ctrl.trackData"
+      class="with-3d-shadow with-transitions">
+</nvd3>

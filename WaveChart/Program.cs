@@ -122,7 +122,7 @@ namespace WaveChart
 
             Console.WriteLine();
 
-            //host.Run();
+            host.Run();
         }
     }
 }

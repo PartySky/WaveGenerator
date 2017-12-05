@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    watch: true,
+    watch: false,
     devtool: 'source-map',
     entry: './frontend/main.module.ts',
     module: {
