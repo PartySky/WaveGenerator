@@ -6,6 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 
+// test
+using System.Threading;
+
+using OpenTK.Audio;
+using OpenTK.Audio.OpenAL;
+
 namespace WaveChart
 {
     public class Program
@@ -18,19 +24,25 @@ namespace WaveChart
         private const int AUDIO_LENGTH_IN_SECONDS = 1;
 		public static byte[] TestWaveData { get; private set; }
         private const int generationMethod = 2;
-        private const string fileToWrite = "test2.wav";
+        private const string fileToWrite = "test2d.wav";
         private const string fileToRead = "test-read2.wav";
         private const string subFolder = "ForTests";
 
 		public static void Main(string[] args)
-        {	
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
+        {
+            bool runHost = false;
+
+            if (runHost) { 
+                var host = new WebHostBuilder()
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>()
+                    .UseApplicationInsights()
+                    .Build();
+                host.Run();
+			};
+            
             string filePathWrite = Path.Combine(
                 Directory.GetCurrentDirectory(), subFolder, fileToWrite
             );
@@ -82,10 +94,12 @@ namespace WaveChart
 					WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
                     wave.Save(filePathWrite);
 					ChartGenerator chartGenerator = new ChartGenerator();
-                    chartGenerator.Read(filePathRead);
+                    //chartGenerator.Read(filePathRead);
 					break;
             }
-            host.Run();
+
+            Playback player = new Playback();
+            player.play(subFolder);
         }
     }
 }
