@@ -10,13 +10,12 @@ namespace WaveChart
 {
     public class Playback
     {
-        public void play(string subFolder){
+        public void play(string subFolder, string fileToPlay){
             using (AudioContext context = new AudioContext())
             {
                 int buffer = AL.GenBuffer();
                 int source = AL.GenSource();
                 int state;
-                string fileToPlay = "Guitar.wav";
                 string filePathPlay = Path.Combine(
                     Directory.GetCurrentDirectory(), subFolder, fileToPlay
                 );
@@ -28,8 +27,19 @@ namespace WaveChart
                     Console.WriteLine("File doesn't exist, path: {0}", filePathPlay);
                     throw new ArgumentNullException(filePathPlay);
                 }
-                byte[] sound_data = Playback.LoadWave(File.Open(filePathPlay, FileMode.Open), out channels, out bits_per_sample, out sample_rate);
-                AL.BufferData(buffer, Playback.GetSoundFormat(channels, bits_per_sample), sound_data, sound_data.Length, sample_rate);
+                byte[] sound_data = LoadWave(File.Open(filePathPlay, FileMode.Open), out channels, out bits_per_sample, out sample_rate);
+
+                short[] sound_data_int = new short[sound_data.Length/2];
+
+                int iInt = 0;
+                for (int iByte = 0; iByte < sound_data.Length - 1; iByte = iByte + 2)
+                {
+                    sound_data_int[iInt] = BitConverter.ToInt16(sound_data, iByte);
+					iInt++;
+                }
+
+
+                AL.BufferData(buffer, GetSoundFormat(channels, bits_per_sample), sound_data, sound_data.Length, sample_rate);
 
                 AL.Source(source, ALSourcei.Buffer, buffer);
                 AL.SourcePlay(source);
@@ -47,7 +57,7 @@ namespace WaveChart
                 }
                 while ((ALSourceState)state == ALSourceState.Playing);
 
-                Console.WriteLine("Playing");
+                Console.WriteLine("");
                 //Trace.WriteLine("");
 
                 AL.SourceStop(source);

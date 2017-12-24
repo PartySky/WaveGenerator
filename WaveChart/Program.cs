@@ -24,7 +24,8 @@ namespace WaveChart
         private const int AUDIO_LENGTH_IN_SECONDS = 1;
 		public static byte[] TestWaveData { get; private set; }
         private const int generationMethod = 2;
-        private const string fileToWrite = "test2d.wav";
+        private const string fileToWrite = "test2.wav";
+        private const string fileToPlay = "test2.wav";
         private const string fileToRead = "test-read2.wav";
         private const string subFolder = "ForTests";
 
@@ -99,7 +100,7 @@ namespace WaveChart
             }
 
             Playback player = new Playback();
-            player.play(subFolder);
+            player.play(subFolder, fileToPlay);
         }
     }
 }

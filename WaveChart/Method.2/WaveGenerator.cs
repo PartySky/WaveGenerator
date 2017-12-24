@@ -49,24 +49,29 @@ namespace WaveChart
                         }
                     }
 
-					data.shortArray[0] = 30000;
-					data.shortArray[2] = 30000;
-					data.shortArray[4] = 30000;
-					data.shortArray[6] = 30000;
-					data.shortArray[8] = 30000;
-					data.shortArray[10] = 30000;
-					data.shortArray[12] = 30000;
-					data.shortArray[14] = 30000;
+                    for (uint i = 0; i < numSamples - 1; i++)
+                    { 
+                        //data.shortArray[i++] = 30000;
+						//data.shortArray[i] = 30;
+                    }
 
-					data.shortArray[1] = 30;
-					data.shortArray[3] = 30;
-					data.shortArray[5] = 30;
-					data.shortArray[7] = 30;
-					data.shortArray[9] = 30;
-					data.shortArray[11] = 30;
-					data.shortArray[13] = 30;
-					data.shortArray[15] = 30;
+                    data.shortArray[0] = 30000;
+                    data.shortArray[2] = 30000;
+                    data.shortArray[4] = 30000;
+                    data.shortArray[6] = 30000;
+                    data.shortArray[8] = 30000;
+                    data.shortArray[10] = 30000;
+                    data.shortArray[12] = 30000;
+                    data.shortArray[14] = 30000;
 
+                    data.shortArray[1] = 30;
+                    data.shortArray[3] = 30;
+                    data.shortArray[5] = 30;
+                    data.shortArray[7] = 30;
+                    data.shortArray[9] = 30;
+                    data.shortArray[11] = -30000;
+                    data.shortArray[13] = -30000;
+                    data.shortArray[15] = -30000;
 
 					// Calculate data chunk size in bytes
 					data.dwChunkSize = (uint)(data.shortArray.Length * (format.wBitsPerSample / 8));
