@@ -59,14 +59,14 @@ namespace WaveChart
                 Directory.GetCurrentDirectory(), subFolder, fileToRead
             );
 
-			WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
-			wave.Save(filePathWrite);
+			//WaveGenerator wave = new WaveGenerator(WaveChart.WaveExampleType.ExampleSineWave);
+			//wave.Save(filePathWrite);
 			ChartGenerator chartGenerator = new ChartGenerator();
 
-            Playback player = new Playback();
-            player.play(subFolder, fileToPlay);
+            //Playback player = new Playback();
+            //player.play(subFolder, fileToPlay);
 
-            canvasRender.WriteOutPutRender(notesData);
+            canvasRender.WriteOutPutRender(notesData, filePathWrite);
         }
     }
 }
