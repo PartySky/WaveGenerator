@@ -1,7 +1,7 @@
 ﻿namespace WaveChart.Iterfaces
 {
-    public interface IWaveReader
+    public interface ITrackLoader
     {
-        short[] GetWaveData(string filePath);
+        INote[] GetTrack(string filePath);
     }
 }

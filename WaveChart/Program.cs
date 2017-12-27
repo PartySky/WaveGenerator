@@ -11,6 +11,7 @@ using System.Threading;
 
 using OpenTK.Audio;
 using OpenTK.Audio.OpenAL;
+using WaveChart.Iterfaces;
 
 namespace WaveChart
 {
@@ -27,6 +28,7 @@ namespace WaveChart
         private const string fileToPlay = "test2.wav";
         private const string fileToRead = "test-read2.wav";
         private const string subFolder = "ForTests";
+        private const string scoreskPath = "scoreskPath";
 
         public static void Main(string[] args)
         {
@@ -44,7 +46,12 @@ namespace WaveChart
                 host.Run();
             };
             #endregion
-            
+
+            ITrackLoader trackLoader = new TrackLoader();
+            INote[] notesData = trackLoader.GetTrack(scoreskPath);
+            IWaveReader waveReader = new WaveReader();
+            ICanvasRender canvasRender = new CanvasRender(waveReader);
+
 			string filePathWrite = Path.Combine(
 				Directory.GetCurrentDirectory(), subFolder, fileToWrite
 			);
@@ -58,6 +65,8 @@ namespace WaveChart
 
             Playback player = new Playback();
             player.play(subFolder, fileToPlay);
+
+            canvasRender.WriteOutPutRender(notesData);
         }
     }
 }
