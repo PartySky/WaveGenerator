@@ -30,7 +30,17 @@ namespace WaveChart
             var firstNote = waveReader.GetWaveData("filePath");
 
 
+            // TODO: use readed sample instead of generated sin
             CreateSinForTest();
+
+            // TODO: convert noteStartTime to sampleId
+            // and use readed sample data plus noteStartTime
+            // like: 
+            // canvasData.shortArray[0 + sampleId] = 30000;
+            // canvasData.shortArray[2 + sampleId] = 30000;
+            // canvasData.shortArray[4 + sampleId] = 30000;
+            // canvasData.shortArray[6 + sampleId] = 30000;
+            // and so on
 
             WrieFile(filePath);
         }
@@ -90,6 +100,7 @@ namespace WaveChart
         #endregion
 
         public uint GetCanvasSize(){
+            // TODO: calculate size depended on notes lenght
             return (uint)(canvasData.shortArray.Length * (format.wBitsPerSample / 8));
         }
 
