@@ -55,24 +55,11 @@ namespace WaveChart
 
         public static List<short> GetStereoFromOneChanel(IEnumerable<short> sound_data, int channel)
         {
-//            var result = channel == 0 
-//                ? sound_data.Where((item, index) => index % 2 != 0).ToList() 
-//                : sound_data.Where((item, index) => index % 2 == 0).ToList();
-//
-//            var resultRestored = new List<short>();
-//            
-//            foreach (var item in result)
-//            {
-//                resultRestored.Add(item);
-//                resultRestored.Add(item);
-//            }
-
             var result = sound_data
                 .Where((n, i) => i % 2 == channel)
                 .SelectMany(n => new [] { n, n }).ToList(); 
             
             return result;
-            
         }
     }
 }
