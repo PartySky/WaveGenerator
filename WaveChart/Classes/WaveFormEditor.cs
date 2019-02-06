@@ -7,51 +7,79 @@ namespace WaveChart
 {
     public static class WaveFormEditor
     {
-        public static List<short> AdjustToneDeviations(List<short> sound_data, int targetTone)
+        public static List<short> AdjustToneDeviations(List<short> soundData, int targetTone)
         {
             var result = new List<short>();
-
-            var test = false;
-            var counter = 0;
-
-            var itemSign = Sign(sound_data.FirstOrDefault());
-            var gotFirstPart = false;
-            const int wavePeriod = 0; //35;
-            var periodThreshold = 0;
-            
-            foreach (var item in sound_data)
+            try
             {
-                if (itemSign == Sign(item) * -1)
+                soundData = soundData.GetRange(0, 400);
+                
+                var test = false;
+                var counter = 0;
+    
+                var itemSign = Sign(soundData.FirstOrDefault());
+                var gotFirstPart = false;
+                const int wavePeriod = 0; //35;
+                var periodThreshold = 0;
+                var periodStartTemp = 0;
+                
+                var periodList = new List<Period>();
+                
+                foreach (var item in soundData)
                 {
-                    if (counter > periodThreshold + wavePeriod / 2)
+                    if (itemSign == Sign(item) * -1)
                     {
-                        if (!gotFirstPart)
+                        if (counter > periodThreshold + wavePeriod / 2)
                         {
-                            result.Add(item);
-                            Console.WriteLine(item);
-                            
-                            gotFirstPart = true;
-                            itemSign = itemSign * -1;
-                            periodThreshold = counter;
-                        }
-                        else
-                        {
-                            break;
+                            if (!gotFirstPart)
+                            {
+                                gotFirstPart = true;
+                                itemSign = itemSign * -1;
+                                periodThreshold = counter;
+                            }
+                            else
+                            {
+                                periodList.Add(new Period(periodStartTemp, counter));
+                                itemSign = itemSign * -1;
+                                gotFirstPart = false;
+                                periodStartTemp = counter + 1;
+                            }
                         }
                     }
-                    result.Add(item);
-                    Console.WriteLine(item);
+                    counter++;
                 }
-                else
+    
+                foreach (var item in periodList)
                 {
-                    result.Add(item);
-                    Console.WriteLine(item);
+                    result.AddRange(StratchPeriod(soundData, item));
                 }
-               counter++;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+           return result;
+        }
+
+        private static IEnumerable<short> StratchPeriod(List<short> soundData, Period period)
+        {
+            var resultTemp = soundData.GetRange(period.Start, period.End - period.Start);
+            var result = new List<short>();
+
+            foreach (var item in resultTemp)
+            {
+                result.Add(item);
+                result.Add(item);
+                result.Add(item);
+                result.Add(item);
+                result.Add(item);
+                result.Add(item);
             }
             
             return result;
         }
+
 
         public static List<short> GetStereoFromOneChanel(IEnumerable<short> sound_data, int channel)
         {
@@ -61,5 +89,18 @@ namespace WaveChart
             
             return result;
         }
+    }
+    
+    public struct Period
+    {
+        public Period(int start, int end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public int End { get; set; }
+
+        public int Start { get; set; }
     }
 }

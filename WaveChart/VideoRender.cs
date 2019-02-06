@@ -12,9 +12,9 @@ namespace WaveChart
         [STAThread]
         public static void DrawTriangles(IEnumerable<short> fixed_sound_data)
         {
-            var points = VideoRender.GetPointsFromAudio(fixed_sound_data);
+            var points = GetPointsFromAudio(fixed_sound_data);
             
-            points = points.Take(200).ToList();
+            points = points.Take(1000).ToList();
             try
             {
                 Console.WriteLine("");
@@ -23,7 +23,7 @@ namespace WaveChart
                     game.Load += (sender, e) =>
                     {
                         // setup settings, load textures, sounds
-                        game.VSync = VSyncMode.On;
+                        game.VSync = VSyncMode.Off;
                     };
     
                     game.Resize += (sender, e) =>
@@ -51,17 +51,20 @@ namespace WaveChart
 
 
                         var offset = -0.95f;
+
+//                        var someXCoefficient = 0.01f;
+                        var someXCoefficient = 0.002f;
                         
                         foreach (var item in points)
                         {
                             GL.Begin(PrimitiveType.Triangles);
                             GL.Color3(Color.MidnightBlue);
-                            GL.Vertex2(offset + 0.0f + 0.01f * item.x, 0.0f);
+                            GL.Vertex2(offset + 0.0f + someXCoefficient * item.x, 0.0f);
                             GL.Color3(Color.SpringGreen);
 //                            GL.Color3(Color.Yellow);
-                            GL.Vertex2(offset + 0.01f + 0.01f * item.x, 0.0f);
+                            GL.Vertex2(offset + someXCoefficient + someXCoefficient * item.x, 0.0f);
                             GL.Color3(Color.Red);
-                            GL.Vertex2(offset + 0.01f + 0.01f * item.x, 0.0001f * item.y);
+                            GL.Vertex2(offset + someXCoefficient + someXCoefficient * item.x, 0.0001f * item.y);
                             GL.End();
                         }
                         
