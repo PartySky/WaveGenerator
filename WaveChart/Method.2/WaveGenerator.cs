@@ -28,22 +28,22 @@ namespace WaveChart
                 case WaveExampleType.ExampleSineWave:
 
                     // Number of samples = sample rate * channels * bytes per sample
-                    uint numSamples = format.dwSamplesPerSec * format.wChannels;
+                    var numSamples = format.dwSamplesPerSec * format.wChannels;
 
                     // Initialize the 16-bit array
                     data.shortArray = new short[numSamples];
 
-                    int amplitude = 32760;  // Max amplitude for 16-bit audio
+                    var amplitude = 32760;  // Max amplitude for 16-bit audio
                     double freq = 440.0f;   // Concert A: 440Hz
 
                     // The "angle" used in the function, adjusted for the number of channels and sample rate.
                     // This value is like the period of the wave.
-                    double t = (Math.PI * 2 * freq) / (format.dwSamplesPerSec * format.wChannels);
+                    var t = (Math.PI * 2 * freq) / (format.dwSamplesPerSec * format.wChannels);
 
                     for (uint i = 0; i < numSamples - 1; i++)
                     {
                         // Fill with a simple sine wave at max amplitude
-                        for (int channel = 0; channel < format.wChannels; channel++)
+                        for (var channel = 0; channel < format.wChannels; channel++)
                         {
                             data.shortArray[i + channel] = Convert.ToInt16(amplitude * Math.Sin(t * i));
                         }
@@ -87,10 +87,10 @@ namespace WaveChart
 				return;
 			}
             // Create a file (it always overwrites)
-            FileStream fileStream = new FileStream(filePath, FileMode.Create);
+            var fileStream = new FileStream(filePath, FileMode.Create);
 
             // Use BinaryWriter to write the bytes to the file
-            BinaryWriter writer = new BinaryWriter(fileStream);
+            var writer = new BinaryWriter(fileStream);
 
             // Write the header
             writer.Write(header.sGroupID.ToCharArray());
@@ -110,13 +110,13 @@ namespace WaveChart
             // Write the data chunk
             writer.Write(data.sChunkID.ToCharArray());
             writer.Write(data.dwChunkSize);
-            foreach (short dataPoint in data.shortArray)
+            foreach (var dataPoint in data.shortArray)
             {
                 writer.Write(dataPoint);
             }
 
             writer.Seek(4, SeekOrigin.Begin);
-            uint filesize = (uint)writer.BaseStream.Length;
+            var filesize = (uint)writer.BaseStream.Length;
             writer.Write(filesize - 8);
 
 			writer.Dispose();

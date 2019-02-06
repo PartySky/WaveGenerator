@@ -22,12 +22,12 @@ namespace myApp
 
         private void GenerateData()
         {
-            uint bufferSize = _sampleRate * _secondsInLength;
+            var bufferSize = _sampleRate * _secondsInLength;
             _dataBuffer = new short[bufferSize];
 
-            int amplitude = 32760;
+            var amplitude = 32760;
 
-            double timePeriod = (Math.PI * 2 * _frequency) /
+            var timePeriod = (Math.PI * 2 * _frequency) /
                (_sampleRate);
 
             for (uint index = 0; index < bufferSize - 1; index++)

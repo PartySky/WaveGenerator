@@ -47,7 +47,7 @@ namespace WaveGenerator
 
         protected override byte[] GetChunkBytes()
         {
-            byte[] result = Chunk.JoinByteArrays(base.GetChunkBytes(),
+            var result = Chunk.JoinByteArrays(base.GetChunkBytes(),
                                           this._RIFFType);            
             return result;
         }
@@ -55,9 +55,9 @@ namespace WaveGenerator
         public void Save()
         {
             _file.Position = 0;
-            uint fileSize = this.Size+_format.Size+_data.Size+_data.FileTailSize-8+_data.PadByte;
+            var fileSize = this.Size+_format.Size+_data.Size+_data.FileTailSize-8+_data.PadByte;
             this._chunkDataSize = BitConverter.GetBytes(fileSize);
-            byte[] chunkBytes = this.GetChunkBytes();
+            var chunkBytes = this.GetChunkBytes();
             _file.Write(chunkBytes, 0, chunkBytes.Length);
         }
 

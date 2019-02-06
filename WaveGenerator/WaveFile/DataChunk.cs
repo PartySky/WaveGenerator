@@ -18,7 +18,7 @@ namespace WaveGenerator
         {
             get
             {
-                uint size = _byteCount + (uint)(this._chunkID.Length + this._chunkDataSize.Length);
+                var size = _byteCount + (uint)(this._chunkID.Length + this._chunkDataSize.Length);
                 return size;
             }
         }
@@ -73,7 +73,7 @@ namespace WaveGenerator
                 _file.Position = newPosition;
             //for(int i = 0; i < _format.Channels; i++)                
                 _file.Write(sample, 0, sample.Length);
-            long bytesToAdd = _file.Position - (_dataOffset + _byteCount);
+            var bytesToAdd = _file.Position - (_dataOffset + _byteCount);
             if (bytesToAdd > 0)
                 _byteCount += (uint)bytesToAdd;         
         }
@@ -88,11 +88,11 @@ namespace WaveGenerator
                 throw new FormatException(string.Format("The sample is in a wrong format. For this wave file a sample must be {0} bytes long, provided sample is {1} bytes long.", _format.ByteDepth, sample.Length));
             if (channel >= _format.Channels || channel < 0)
                 throw new ArgumentException("Incorrect channel number", "channel");
-            long newPosition = _dataOffset + position*_format.ByteDepth*_format.Channels+_format.ByteDepth*channel;
+            var newPosition = _dataOffset + position*_format.ByteDepth*_format.Channels+_format.ByteDepth*channel;
             if (newPosition != _file.Position)
                 _file.Position = newPosition;
             _file.Write(sample, 0, sample.Length);
-            long bytesToAdd = _file.Position - (_dataOffset + _byteCount);
+            var bytesToAdd = _file.Position - (_dataOffset + _byteCount);
             if (bytesToAdd > 0)
                 _byteCount += (uint)bytesToAdd;
         }
@@ -108,14 +108,14 @@ namespace WaveGenerator
 
         protected override byte[] GetChunkBytes()
         {
-            byte[] result = Chunk.JoinByteArrays(this.GetHeaderBytes());
+            var result = Chunk.JoinByteArrays(this.GetHeaderBytes());
             return result;
         }
 
         private byte[] GetHeaderBytes()
         {
             this._chunkDataSize = BitConverter.GetBytes(_byteCount);
-            byte[] result = Chunk.JoinByteArrays(base.GetChunkBytes());
+            var result = Chunk.JoinByteArrays(base.GetChunkBytes());
             return result;
         }
 
@@ -125,7 +125,7 @@ namespace WaveGenerator
             _dataOffset = (uint)(this._chunkOffset + this._chunkID.Length + this._chunkDataSize.Length);
             _byteCount = this.ChunkDataSize;
             _file = file;
-            uint fileTailSize = (uint)_file.Length - _dataOffset - _byteCount;
+            var fileTailSize = (uint)_file.Length - _dataOffset - _byteCount;
             if (fileTailSize > 0)
             {
                 //is there the pad byte
@@ -148,7 +148,7 @@ namespace WaveGenerator
         public void Save()
         {
             _file.Position = _chunkOffset;
-            byte[] chunkBytes = this.GetChunkBytes();
+            var chunkBytes = this.GetChunkBytes();
             _file.Write(chunkBytes, 0, chunkBytes.Length);
 
             _file.Position = _dataOffset + _byteCount;

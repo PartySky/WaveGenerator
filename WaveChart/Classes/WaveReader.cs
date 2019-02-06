@@ -10,7 +10,7 @@ namespace WaveChart
     {
         public short[] GetWaveData(string filePath)
         {
-            short[] waveData = new short[5];
+            var waveData = new short[5];
             return waveData;
         }
     }

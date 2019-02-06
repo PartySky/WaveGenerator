@@ -26,11 +26,11 @@ namespace WaveChart
 
         public byte[] GetBytes()
         {
-            List<Byte> chunkBytes = new List<Byte>();
+            var chunkBytes = new List<Byte>();
 
             chunkBytes.AddRange(Encoding.ASCII.GetBytes(ChunkId));
             chunkBytes.AddRange(BitConverter.GetBytes(ChunkSize));
-            byte[] bufferBytes = new byte[WaveData.Length * 2];
+            var bufferBytes = new byte[WaveData.Length * 2];
             Buffer.BlockCopy(WaveData, 0, bufferBytes, 0,
                bufferBytes.Length);
             chunkBytes.AddRange(bufferBytes.ToList());
@@ -43,8 +43,8 @@ namespace WaveChart
         {
             WaveData = new short[leftBuffer.Length +
                rightBuffer.Length];
-            int bufferOffset = 0;
-            for (int index = 0; index < WaveData.Length; index += 2)
+            var bufferOffset = 0;
+            for (var index = 0; index < WaveData.Length; index += 2)
             {
                 WaveData[index] = leftBuffer[bufferOffset];
                 WaveData[index + 1] = rightBuffer[bufferOffset];

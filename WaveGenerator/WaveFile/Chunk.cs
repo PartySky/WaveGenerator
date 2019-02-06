@@ -64,8 +64,8 @@ namespace WaveGenerator
                     size += array.Length;
                 }
             }
-            byte[] result = new byte[size];
-            int position = 0;
+            var result = new byte[size];
+            var position = 0;
             foreach (var array in arrays)
             {
                 if (arrays != null && array is byte[])

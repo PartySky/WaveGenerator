@@ -22,7 +22,7 @@ namespace WaveGenerator
         {
             get
             {
-                uint size = (uint)(_chunkID.Length+
+                var size = (uint)(_chunkID.Length+
                                    _chunkDataSize.Length+
                                    _compressionCode.Length+
                                    _numberOfChannels.Length+
@@ -110,7 +110,7 @@ namespace WaveGenerator
             this._bitDepth = (BitDepth)bitsPerSample;
             this._byteDepth = (byte)(bitsPerSample / 8);
           
-            ushort BA = (ushort)(bitsPerSample / 8 * channels);
+            var BA = (ushort)(bitsPerSample / 8 * channels);
             _blockAlign = BitConverter.GetBytes(BA);      
            
             _averageBytesPerSecond = BitConverter.GetBytes((uint)(sampleRate * BA));                 
@@ -142,7 +142,7 @@ namespace WaveGenerator
 
         public void Save()
         {
-            byte[] chunkBytes = this.GetChunkBytes();
+            var chunkBytes = this.GetChunkBytes();
             _file.Position = _chunkOffset;
             _file.Write(chunkBytes, 0, chunkBytes.Length);
         }

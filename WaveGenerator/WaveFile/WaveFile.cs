@@ -67,7 +67,7 @@ namespace WaveGenerator
         {
             if (filePath == null)
                 throw new ArgumentNullException("filePath");
-            FileStream file = new FileStream(filePath, FileMode.Open);
+            var file = new FileStream(filePath, FileMode.Open);
             _header.LoadChunkBytes(file, 0);
             _format.LoadChunkBytes(file, _header.Size);
             _data.LoadChunkBytes(file, _header.Size + _format.Size);

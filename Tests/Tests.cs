@@ -20,7 +20,7 @@ namespace Tests
         private static Random r = new Random();  
         static Tests()
         {
-            DirectoryInfo dir = new DirectoryInfo(TestResultDir);
+            var dir = new DirectoryInfo(TestResultDir);
             if (!dir.Exists)
                 dir.Create();
             else
@@ -29,12 +29,12 @@ namespace Tests
 
         public static void Run(TestMethod test, string testName)
         {
-            FileStream file = new FileStream(
+            var file = new FileStream(
                Path.Combine(TestResultDir, string.Format("{0} {1}.wav", testName, Timestamp)),
                FileMode.Create);
-            WaveFile wavefile = new WaveFile(44100, BitDepth.Bit24, 1, file);
-            SoundGenerator sg = new SoundGenerator(wavefile);
-            TimeSpan time = test(sg);
+            var wavefile = new WaveFile(44100, BitDepth.Bit24, 1, file);
+            var sg = new SoundGenerator(wavefile);
+            var time = test(sg);
             sg.Save();
             file.Close();
             file.Dispose();
@@ -43,15 +43,15 @@ namespace Tests
 
         public static TimeSpan TestLoran(SoundGenerator sg)
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
-            string sounds = "1180 128;1180 128;1180 128;1180 128;1180 128;1115 128;1115 128;1180 128;1180 128;1115 128;1180 128;1115 128;1180 128";
-            string[] separate = sounds.Split(';');
-            foreach(string sound in separate)
+            var sounds = "1180 128;1180 128;1180 128;1180 128;1180 128;1115 128;1115 128;1180 128;1180 128;1115 128;1180 128;1115 128;1180 128";
+            var separate = sounds.Split(';');
+            foreach(var sound in separate)
             {
-                string[] note = sound.Split(' ');
-                int f = int.Parse(note[0]);
-                int d = int.Parse(note[1]);
+                var note = sound.Split(' ');
+                var f = int.Parse(note[0]);
+                var d = int.Parse(note[1]);
                 sg.AddSimpleTone(f, d, false);
             }
             sw.Stop();
@@ -60,12 +60,12 @@ namespace Tests
 
         public static TimeSpan TestRandomChirp(SoundGenerator sg)
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
             double f1 = 0;
             double f2 = 440;
-            Random r = new Random();
-            for (int i = 0; i < 100; i++)
+            var r = new Random();
+            for (var i = 0; i < 100; i++)
             {
                 f1 = f2;
                 f2 = r.Next(300, 4000);
@@ -78,7 +78,7 @@ namespace Tests
 
         public static TimeSpan TestChirp(SoundGenerator sg)
         {
-            Stopwatch sw = new Stopwatch();
+            var sw = new Stopwatch();
             sw.Start();
             sg.AddSimpleTone(440, 2000, false);
             sg.AddSineChirp(440, 900, 3000);
@@ -89,11 +89,11 @@ namespace Tests
 
         public static void TestSimple()
         {         
-            FileStream file = new FileStream(
+            var file = new FileStream(
                 Path.Combine(TestResultDir, string.Format("{0} {1}.wav", "Simple tone generation test", Timestamp)),
                 FileMode.Create);
-            WaveFile wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
-            SoundGenerator sg = new SoundGenerator(wavefile);
+            var wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
+            var sg = new SoundGenerator(wavefile);
             sg.AddSimpleTone(440, 1000);
             sg.Save();
             file.Close();
@@ -103,12 +103,12 @@ namespace Tests
 
         public static void TestClicks()
         {            
-            FileStream file = new FileStream(
+            var file = new FileStream(
                 Path.Combine(TestResultDir, string.Format("{0} {1}.wav", "Click test", Timestamp)),
                 FileMode.Create);
-            WaveFile wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
-            SoundGenerator sg = new SoundGenerator(wavefile);
-            for(int i = 0; i< 100; i++)           
+            var wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
+            var sg = new SoundGenerator(wavefile);
+            for(var i = 0; i< 100; i++)           
                 sg.AddSimpleTone(300, r.Next(100, 600), false);
             sg.Save();
             file.Close();
@@ -119,12 +119,12 @@ namespace Tests
 
         public static void TestComplex()
         {            
-            FileStream file = new FileStream(
+            var file = new FileStream(
                 Path.Combine(TestResultDir, string.Format("{0} {1}.wav", "Complex tone generation test", Timestamp)),
                 FileMode.Create);
-            WaveFile wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
-            SoundGenerator sg = new SoundGenerator(wavefile);
-            for (int i = 0; i < 100; i++)
+            var wavefile = new WaveFile(44100, BitDepth.Bit32, 2, file);
+            var sg = new SoundGenerator(wavefile);
+            for (var i = 0; i < 100; i++)
                 sg.AddComplexTone(r.Next(100,500), false, 261.63, 329.63, 392);              
             sg.Save();
             file.Close();
@@ -135,12 +135,12 @@ namespace Tests
 
         public static TimeSpan TestFade(SoundGenerator sg)
         {
-            Stopwatch sw = new Stopwatch();
-            Random r = new Random();
-            int n = 100;
+            var sw = new Stopwatch();
+            var r = new Random();
+            var n = 100;
             var frequencies = Enumerable.Repeat(1, n).Select(frequency => frequency * r.Next(400, 1000)).ToArray();
             sw.Start();
-            for (int i = 0; i < n; i++)
+            for (var i = 0; i < n; i++)
             {
                 sg.AddSimpleTone(frequencies[i], 300, true);
             }

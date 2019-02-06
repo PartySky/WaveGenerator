@@ -55,7 +55,7 @@ namespace WaveChart
 
         public byte[] GetBytes()
         {
-            List<Byte> chunkBytes = new List<byte>();
+            var chunkBytes = new List<byte>();
 
             chunkBytes.AddRange(Encoding.ASCII.GetBytes(ChunkId));
             chunkBytes.AddRange(BitConverter.GetBytes(ChunkSize));
