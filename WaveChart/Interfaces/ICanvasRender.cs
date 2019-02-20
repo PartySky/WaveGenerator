@@ -2,6 +2,6 @@
 {
     public interface ICanvasRender
     {
-        void WriteOutPutRender(INote[] notesData, string filePath);
+        void WriteOutPutRender(INoteOld[] notesOldData, string filePath);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace WaveChart
 {
-    internal class Note : INote
+    internal class NoteOldOld : INoteOld
     {
     }
 }

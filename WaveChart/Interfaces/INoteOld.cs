@@ -1,6 +1,6 @@
 ﻿namespace WaveChart.Iterfaces
 {
-    public interface INote
+    public interface INoteOld
     {
     }
 }

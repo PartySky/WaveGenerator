@@ -1,18 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Routing.Tree;
 using static System.Math;
+using static WaveChart.ExceptionHandler;
 
 namespace WaveChart
 {
     public static class WaveFormEditor
     {
+        private const int CROSSFADE_TYPE_FADEIN = 0;
+        private const int CROSSFADE_TYPE_FADEOUT = 1;
         public static List<short> AdjustToneDeviations(List<short> soundData, int targetTone)
         {
             var result = new List<short>();
             try
             {
-                soundData = soundData.GetRange(0, 400);
+//                soundData = soundData.GetRange(0, 400);
                 
                 var test = false;
                 var counter = 0;
@@ -51,35 +55,42 @@ namespace WaveChart
     
                 foreach (var item in periodList)
                 {
-                    result.AddRange(StratchPeriod(soundData, item));
+                    result.AddRange(StratchPeriod(soundData, item, targetTone));
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                throw;
+                HandleException(e.Message);
             }
            return result;
         }
 
-        private static IEnumerable<short> StratchPeriod(List<short> soundData, Period period)
+        private static IEnumerable<short> StratchPeriod(List<short> soundData, Period period, int targetTone)
         {
+            var targetItemsCount = GetTargetItemsCount(targetTone);
+            
             var resultTemp = soundData.GetRange(period.Start, period.End - period.Start);
-            var result = new List<short>();
 
-            foreach (var item in resultTemp)
+            const bool test = true;
+            if (test)
             {
-                result.Add(item);
-                result.Add(item);
-                result.Add(item);
-                result.Add(item);
-                result.Add(item);
-                result.Add(item);
+                targetItemsCount = resultTemp.Count * 130 / 100;
             }
+
+            var increment = Convert.ToDouble(resultTemp.Count) / targetItemsCount;
+
+            var result = Enumerable.Range(0, targetItemsCount).
+                Select(x => resultTemp[(int)(x * increment)]).
+                ToList();
             
             return result;
         }
 
+        private static int GetTargetItemsCount(int targetTone)
+        {
+//            return 5;
+            return 400;
+        }
 
         public static List<short> GetStereoFromOneChanel(IEnumerable<short> sound_data, int channel)
         {
@@ -89,8 +100,63 @@ namespace WaveChart
             
             return result;
         }
-    }
     
+        public static List<short> MakeFadeOut(IEnumerable<short> sound_data, int start)
+        {
+            var result = MakeCrossFade(sound_data, start, 0, CROSSFADE_TYPE_FADEOUT);
+            
+            return result;
+        }
+        
+        public static List<short> MakeFadeIn(IEnumerable<short> sound_data, int end)
+        {
+            var result = MakeCrossFade(sound_data, 0, end, CROSSFADE_TYPE_FADEIN);
+            
+            return result;
+        }
+        
+        private static List<short> MakeCrossFade(IEnumerable<short> sound_data, int start, int end, int type)
+        {
+            var result = new List<short>();
+            var fadedItemsCount = GetFadedItemsCount(sound_data.Count(),start, end, type);
+            
+            switch (type)
+            {
+                case CROSSFADE_TYPE_FADEIN:
+                {
+                    foreach (var item in sound_data)
+                    {
+                        
+                    }
+                }
+                    break;
+                case CROSSFADE_TYPE_FADEOUT:
+                    break;
+            }
+
+            return result;
+        }
+
+        private static int GetFadedItemsCount(int audioLength, int start, int end, int type)
+        {
+            var result = 0;
+            switch (type)
+            {
+                case CROSSFADE_TYPE_FADEIN:
+                {
+                    result = audioLength - end;
+                    break;
+                }
+                case CROSSFADE_TYPE_FADEOUT:
+                {
+                    result = audioLength - start;
+                    break;
+                }
+            }
+            return result;
+        }
+    }
+
     public struct Period
     {
         public Period(int start, int end)

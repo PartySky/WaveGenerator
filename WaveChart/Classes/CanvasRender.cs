@@ -9,7 +9,7 @@ namespace WaveChart
 {
     public class CanvasRender : ICanvasRender
     {
-        private INote[] notesData;
+        private INoteOld[] _notesOldData;
         private IWaveReader waveReader;
         // Header, Format, Data chunks
         WaveHeader header;
@@ -25,7 +25,7 @@ namespace WaveChart
             canvasData = new WaveDataChunk();
         }
 
-        public void WriteOutPutRender(INote[] notesData, string filePath)
+        public void WriteOutPutRender(INoteOld[] notesOldData, string filePath)
         {
             var firstNote = waveReader.GetWaveData("filePath");
 
@@ -42,7 +42,7 @@ namespace WaveChart
             // canvasData.shortArray[6 + sampleId] = 30000;
             // and so on
 
-            WrieFile(filePath);
+            WriteFile(filePath);
         }
 
         #region test
@@ -74,12 +74,12 @@ namespace WaveChart
         }
         #endregion
 
-        public uint GetCanvasSize(){
+        private uint GetCanvasSize(){
             // TODO: calculate size depended on notes lenght
             return (uint)(canvasData.shortArray.Length * (format.wBitsPerSample / 8));
         }
 
-        public void WrieFile(string filePath)
+        private void WriteFile(string filePath)
         {
             canvasData.dwChunkSize = GetCanvasSize();
             var fileStream = new FileStream(filePath, FileMode.Create);

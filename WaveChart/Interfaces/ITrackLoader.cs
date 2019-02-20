@@ -2,6 +2,6 @@
 {
     public interface ITrackLoader
     {
-        INote[] GetTrack(string filePath);
+        INoteOld[] GetTrack(string filePath);
     }
 }

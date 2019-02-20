@@ -5,10 +5,11 @@ namespace WaveChart
 {
     internal class TrackLoader : ITrackLoader
     {
-        public INote[] GetTrack(string filePath)
+        public INoteOld[] GetTrack(string filePath)
         {
-            INote[] notesData = new Note[5];
-            return notesData;
+//            INoteOld[] notesOldData = new Note[5];
+//            return notesOldData;
+            return null;
         }
     }
 }

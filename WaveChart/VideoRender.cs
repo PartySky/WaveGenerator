@@ -50,10 +50,11 @@ namespace WaveChart
                         GL.Ortho(-1.0, 1.0, -1.0, 1.0, 0.0, 4.0);
 
 
-                        var offset = -0.95f;
+                        var offset = -1f;
+//                        var offset = -0.95f;
 
-//                        var someXCoefficient = 0.01f;
-                        var someXCoefficient = 0.002f;
+                        var someXCoefficient = 0.01f;
+//                        var someXCoefficient = 0.002f;
                         
                         foreach (var item in points)
                         {
