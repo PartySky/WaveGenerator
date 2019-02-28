@@ -11,14 +11,14 @@ namespace WaveChart
     {
         private const int CROSSFADE_TYPE_FADEIN = 0;
         private const int CROSSFADE_TYPE_FADEOUT = 1;
-        public static List<short> AdjustToneDeviations(List<short> soundData, int targetTone)
+        
+        public static List<Period> GetPeriodList(List<short> soundData)
         {
-            var result = new List<short>();
+            var result = new List<Period>();
             try
             {
 //                soundData = soundData.GetRange(0, 400);
                 
-                var test = false;
                 var counter = 0;
     
                 var itemSign = Sign(soundData.FirstOrDefault());
@@ -27,7 +27,11 @@ namespace WaveChart
                 var periodThreshold = 0;
                 var periodStartTemp = 0;
                 
-                var periodList = new List<Period>();
+                if(itemSign == 0)
+                {
+                    itemSign = Sign(soundData.Skip(counter).FirstOrDefault(p => p != 0)) * -1;
+                    gotFirstPart = true;
+                }
                 
                 foreach (var item in soundData)
                 {
@@ -43,7 +47,7 @@ namespace WaveChart
                             }
                             else
                             {
-                                periodList.Add(new Period(periodStartTemp, counter));
+                                result.Add(new Period(periodStartTemp, counter));
                                 itemSign = itemSign * -1;
                                 gotFirstPart = false;
                                 periodStartTemp = counter + 1;
@@ -52,6 +56,20 @@ namespace WaveChart
                     }
                     counter++;
                 }
+            }
+            catch (Exception e)
+            {
+                HandleException(e.Message);
+            }
+            return result;
+        }
+        
+        public static List<short> AdjustToneDeviations(List<short> soundData, int targetTone)
+        {
+            var result = new List<short>();
+            try
+            {   
+                var periodList = GetPeriodList(soundData);
     
                 foreach (var item in periodList)
                 {
